@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
     const ipAddress = req.header("x-forwarded-for") || req.socket.remoteAddress;
     res.send(`
       <center>
-        <h1>Welcome To Denonime API</h1>
+        <h1>Welcome To Denonime Addon API</h1>
         <h4>Client From ${ipAddress}</h4>
       <center>
     `);
