@@ -45,7 +45,7 @@ exports.getSourcePlayer = async (req, res) => {
   try {
     const { link, strategy } = req.body;
     const html = await axiosServices.getHtmlWithCustomHeader(link);
-    const resultVideoPlayer =  cheerioServices.getVideoPlayer(html, strategy);
+    const resultVideoPlayer = cheerioServices.getVideoPlayer(html, strategy);
     res.json({
       status: "success",
       data: resultVideoPlayer,

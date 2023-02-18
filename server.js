@@ -29,7 +29,7 @@ app.all("*", (req, res) => {
   });
 });
 
-const port = 3000 || process.env.PORT;
+const port = 4000 || process.env.PORT;
 
 app.listen(port, () => {
   console.log(`Server is running in http://localhost:${port}`);
