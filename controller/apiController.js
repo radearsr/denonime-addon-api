@@ -44,7 +44,7 @@ exports.getEmbedController = async (req, res) => {
 exports.getSourcePlayer = async (req, res) => {
   try {
     const { link, strategy } = req.body;
-    const html = await axiosServices.getHtmlWithCustomHeader(link);
+    const html = await axiosServices.getHtmlWithCustomHeader(req.headers["sec-ch-ua"],link);
     const resultVideoPlayer = cheerioServices.getVideoPlayer(html, strategy);
     res.json({
       status: "success",
