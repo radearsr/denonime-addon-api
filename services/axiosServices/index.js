@@ -9,18 +9,18 @@ exports.checkDomainAndGetHtml = async (domain) => {
   return getHtml.data;
 };
 
-exports.getHtmlWithCustomHeader = async (chromium, linkStreaming) => {
+exports.getHtmlWithCustomHeader = async (custom, linkStreaming) => {
   const headers = {
     "accept": "*/*",
     "accept-encoding": "gzip, deflate, br",
     "accept-language": "en-US,en;q=0.9",
-    "sec-ch-ua": `${chromium}`,
-    "sec-ch-ua-mobile": '?0',
-    "sec-ch-ua-platform": "Windows",
+    "sec-ch-ua": `${custom.headerSecchua}`,
+    "sec-ch-ua-mobile": `${custom.headerSecchuaMobile}`,
+    "sec-ch-ua-platform": `${custom.headerSecchuaPlatform}`,
     "sec-fetch-dest": "",
     "sec-fetch-mode": "cors",
     "sec-fetch-site": "none",
-    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+    "user-agent": `${custom.headerUserAgent}`,
   }
   console.log(headers);
   const getHtml = await axios.get(linkStreaming, { headers  });

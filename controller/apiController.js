@@ -45,7 +45,13 @@ exports.getSourcePlayer = async (req, res) => {
   try {
     const { link, strategy } = req.body;
     console.log(req.headers);
-    const html = await axiosServices.getHtmlWithCustomHeader(req.headers["sec-ch-ua"],link);
+    const customHeaders = {
+      headerSecchua: req.headers["sec-ch-ua"],
+      headerSecchuaMobile: req.headers["sec-ch-ua-mobile"],
+      headerSecchuaPlatform: req.headers["sec-ch-ua-platform"],
+      headerUserAgent: req.headers["user-agent"],
+    }
+    const html = await axiosServices.getHtmlWithCustomHeader(customHeaders, link);
     const resultVideoPlayer = cheerioServices.getVideoPlayer(html, strategy);
     res.json({
       status: "success",
