@@ -3,8 +3,8 @@ const cheerioServices = require("../services/cheerioServices");
 
 exports.monitoringController = async (req, res) => {
   try {
-    const { domain, lastTotalEps } = req.body;
-    const html = await axiosServices.checkDomainAndGetHtml(domain);
+    const { link, lastTotalEps } = req.body;
+    const html = await axiosServices.checkDomainAndGetHtml(link);
     const updatedEps = cheerioServices.getEpisodesAndCompare(html, lastTotalEps);
     res.json({
       status: "success",
