@@ -1,8 +1,15 @@
 const axiosServices = require("../services/axiosServices");
 const cheerioServices = require("../services/cheerioServices");
+const {
+  monitoringPayloadSchema,
+  getEmbedPayloadSchema,
+  getSourcePayloadSchema,
+  getSourceHeaderSchema,
+} = require("../services/payloadServices");
 
 exports.monitoringController = async (req, res) => {
   try {
+    monitoringPayloadSchema(req.body);
     const { link, lastTotalEps } = req.body;
     const html = await axiosServices.checkDomainAndGetHtml(link);
     const updatedEps = cheerioServices.getEpisodesAndCompare(html, lastTotalEps);
@@ -14,15 +21,14 @@ exports.monitoringController = async (req, res) => {
     console.log(error);
     res.json({
       status: "error",
-      data: {
-        error
-      }
+      message: error.message,
     });
   }
 };
 
 exports.getEmbedController = async (req, res) => {
   try {
+    getEmbedPayloadSchema(req.body);
     const { link } = req.body;
     const html = await axiosServices.checkDomainAndGetHtml(link);
     const resultEmbed = cheerioServices.getDefaultEmbedPlayer(html);
@@ -43,6 +49,8 @@ exports.getEmbedController = async (req, res) => {
 
 exports.getSourcePlayer = async (req, res) => {
   try {
+    getSourcePayloadSchema(req.body);
+    getSourceHeaderSchema(req.headers);
     const { link, strategy } = req.body;
     console.log(req.headers);
     const customHeaders = {
