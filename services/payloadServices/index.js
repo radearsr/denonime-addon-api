@@ -17,7 +17,7 @@ exports.getSourcePayloadSchema = (payload) => {
 };
 
 exports.getSourceHeaderSchema = (headers) => {
-  if (!headers["sec-ch-ua"] || !headers["sec-ch-ua-mobile"] || !headers["sec-ch-ua-platform"] || !headers["user-agent"]) {
-    throw new Error("Header belum sesuai pastikan sec-ch-ua, sec-ch-ua-mobile, sec-ch-ua-platform, user-agent terisi");
+  if (!headers["sec-ch-ua"] || !headers["user-agent"]) {
+    throw new Error("Header belum sesuai pastikan sec-ch-ua, user-agent terisi");
   }
 }

@@ -56,8 +56,6 @@ exports.getSourcePlayer = async (req, res) => {
     console.log(req.headers);
     const customHeaders = {
       headerSecchua: req.headers["sec-ch-ua"],
-      headerSecchuaMobile: req.headers["sec-ch-ua-mobile"],
-      headerSecchuaPlatform: req.headers["sec-ch-ua-platform"],
       headerUserAgent: req.headers["user-agent"],
     }
     const html = await axiosServices.getHtmlWithCustomHeader(customHeaders, link);
