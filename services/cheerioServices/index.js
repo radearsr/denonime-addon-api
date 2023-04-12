@@ -54,6 +54,7 @@ exports.getAllAnimeList = (html) => {
   const listAnimes = [];
   $(".hodebgst").each((idx, el) => {
     const text = $(el).text().trim();
+    const link = $(el).attr("href");
     let title;
     let status;
     let type;
@@ -73,7 +74,8 @@ exports.getAllAnimeList = (html) => {
     listAnimes.push({
       title: title.trim(),
       status,
-      type
+      type,
+      link
     });
   });
   return listAnimes;
