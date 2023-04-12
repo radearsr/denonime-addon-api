@@ -13,7 +13,7 @@ const ownStrategy = (html) => {
   const $ = cheerio.load(html);
   const player = $("#player > source").attr("src");
   return player;
-}
+};
 
 exports.getEpisodesAndCompare = (html, lastTotalEps) => {
   const capturedEps = [];
@@ -35,7 +35,7 @@ exports.getDefaultEmbedPlayer = (html) => {
   const $ = cheerio.load(html);
   const iframe = $("#pembed iframe").attr("src");
   return iframe;
-}
+};
 
 exports.getVideoPlayer = (html, strategy) => {
   let video;
@@ -47,4 +47,34 @@ exports.getVideoPlayer = (html, strategy) => {
     video = "Strategy Tidak Tersedia";
   }
   return video;
-}
+};
+
+exports.getAllAnimeList = (html) => {
+  const $ = cheerio.load(html);
+  const listAnimes = [];
+  $(".hodebgst").each((idx, el) => {
+    const text = $(el).text().trim();
+    let title;
+    let status;
+    let type;
+    if (text.includes("Movie")) {
+      [title,] = text.split("Movie");
+      type = "Movie";
+      status = "Completed";
+    } else if (text.includes("On-Going")) {
+      [title,] = text.split("On-Going");
+      type = "Series";
+      status = "Ongoing";
+    } else {
+      title = text;
+      type = "Series";
+      status = "Completed";
+    }
+    listAnimes.push({
+      title: title.trim(),
+      status,
+      type
+    });
+  });
+  return listAnimes;
+};

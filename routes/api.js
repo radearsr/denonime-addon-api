@@ -6,5 +6,6 @@ const api = require("../controller/apiController");
 router.post("/monitoring", api.monitoringController);
 router.post("/embed", api.getEmbedController);
 router.post("/player", api.getSourcePlayer);
+router.post("/animes", api.getAllListAnimeController);
 
 module.exports = router;

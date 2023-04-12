@@ -26,6 +26,25 @@ exports.monitoringController = async (req, res) => {
   }
 };
 
+exports.getAllListAnimeController = async (req, res) => {
+  try {
+    getEmbedPayloadSchema(req.body);
+    const { link } = req.body;
+    const html = await axiosServices.getHtmlFullListAnimes(link);
+    const animes = cheerioServices.getAllAnimeList(html);
+    res.json({
+      status: "success",
+      data: animes,
+    })
+  } catch (error) {
+    console.log(error);
+    res.json({
+      status: "error",
+      message: error.message,
+    });    
+  }
+};
+
 exports.getEmbedController = async (req, res) => {
   try {
     getEmbedPayloadSchema(req.body);

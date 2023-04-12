@@ -22,4 +22,9 @@ exports.getHtmlWithCustomHeader = async (custom, linkStreaming) => {
   }
   const getHtml = await axios.get(linkStreaming, { headers  });
   return getHtml.data;
-}
+};
+
+exports.getHtmlFullListAnimes = async (linkPages) => {
+  const getHtml = await axios.get(linkPages);
+  return getHtml.data;
+};

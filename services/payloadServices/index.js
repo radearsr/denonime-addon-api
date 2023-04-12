@@ -20,4 +20,4 @@ exports.getSourceHeaderSchema = (headers) => {
   if (!headers["sec-ch-ua"] || !headers["user-agent"]) {
     throw new Error("Header belum sesuai pastikan sec-ch-ua, user-agent terisi");
   }
-}
+};
