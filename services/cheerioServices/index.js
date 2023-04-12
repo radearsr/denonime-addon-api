@@ -80,3 +80,17 @@ exports.getAllAnimeList = (html) => {
   });
   return listAnimes;
 };
+
+exports.getDetailAnime = async (html) => {
+  const $ = cheerio.load(html);
+  const description = $(".sinopc").text();
+  const rating = $(".infozingle > p:nth-child(3)").text();
+  const releaseDate = $(".infozingle > p:nth-child(9)").text();
+  const genres = $(".infozingle > p:nth-child(11)").text();
+  return {
+    description,
+    rating: rating.split("Skor: ")[1],
+    releaseDate: releaseDate.split("Tanggal Rilis: ")[1],
+    genres: genres.split("Genre: ")[1],
+  };
+};
