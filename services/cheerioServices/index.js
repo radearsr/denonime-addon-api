@@ -84,13 +84,41 @@ exports.getAllAnimeList = (html) => {
 exports.getDetailAnime = async (html) => {
   const $ = cheerio.load(html);
   const description = $(".sinopc").text();
+  const title = $(".infozingle > p:nth-child(1)").text();
   const rating = $(".infozingle > p:nth-child(3)").text();
   const releaseDate = $(".infozingle > p:nth-child(9)").text();
   const genres = $(".infozingle > p:nth-child(11)").text();
   return {
     description,
+    title: title.split("Judul: ")[1],
     rating: rating.split("Skor: ")[1],
     releaseDate: releaseDate.split("Tanggal Rilis: ")[1],
     genres: genres.split("Genre: ")[1],
+  };
+};
+
+exports.getResultSearch = (html, includesText) => {
+  const $ = cheerio.load(html);
+  const result = [];
+  $("a.hoverinfo_trigger.fw-b.fl-l").each((idx, el) => {
+    const title = $(el).children("strong").text();
+    const link = $(el).attr("href");
+    if (title.includes(includesText)) {
+      result.push({
+        title,
+        link,
+      });
+    }
+  });
+  return result;
+};
+
+exports.getDetailMAL = (html) => {
+  const $ = cheerio.load(html);
+  const rating = $("div.score-label").text();
+  const description = $("p[itemprop='description']").text();
+  return {
+    rating,
+    description,
   };
 };
