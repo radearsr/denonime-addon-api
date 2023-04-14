@@ -117,8 +117,17 @@ exports.getDetailMAL = (html) => {
   const $ = cheerio.load(html);
   const rating = $("div.score-label").text();
   const description = $("p[itemprop='description']").text();
+  const releaseDate = []
+  $(".spaceit_pad > .dark_text").each((idx, el) => {
+    const contentDetails = $(el).parent().text();
+    if (contentDetails.includes("Aired:")) {
+      const [,,date] = contentDetails.split("\n")
+      releaseDate.push(date.trim());
+    }
+  });
   return {
     rating,
     description,
+    releaseDate: releaseDate[0],
   };
 };

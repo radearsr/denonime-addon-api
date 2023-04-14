@@ -16,15 +16,18 @@ const validationDetails = async (detail) => {
     if (resultLists.length < 1 || resultLists.length > 1) {
       detail.description = "NULL";
       detail.rating = 0;
+      return detail;
     }
     const contentDetailFromMAL = await axiosServices.getHtmlContent(resultLists[0].link);
     const detailFromMAL = cheerioServices.getDetailMAL(contentDetailFromMAL);
-    const { text: translatedDescription } = await translate(detailFromMAL.description, {from: 'en', to: 'id'});
-    detail.description = translatedDescription; 
+    // const { text: translatedDescription } = await translate(detailFromMAL.description, {from: 'en', to: 'id'});
+    detail.description = detailFromMAL.description; 
+    detail.releaseDate = detailFromMAL.releaseDate;
     if (detail.rating === "") {
       detail.rating = detailFromMAL.rating;
     }
   }
+  // console.log(detail.releaseDate);
   if (detail.releaseDate.includes("to")) {
     [detail.releaseDate] = detail.releaseDate.split("to"); 
   }
