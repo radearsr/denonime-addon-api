@@ -32,8 +32,10 @@ exports.getHtmlContent = async (linkPages) => {
 exports.translateToIndo = async (text) => {
   const splitedText = text.split("\n");
   const mergeText = splitedText.join("");
-  console.log(mergeText);
-  const result = await axios.get(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=id&dt=t&q=${encodeURI(mergeText)}`);
-  console.log(result);
-  return result.data[0][0][0];
+  const translated = await axios.get(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=id&dt=t&q=${encodeURI(mergeText)}`);
+  const mappedTranslated = translated.data[0].map((arr) => {
+    return arr[0];
+  });
+  const result = mappedTranslated.join("");
+  return result;
 };
