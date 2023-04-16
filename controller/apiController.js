@@ -1,4 +1,3 @@
-const { translate } = require("@vitalets/google-translate-api");
 const axiosServices = require("../services/axiosServices");
 const cheerioServices = require("../services/cheerioServices");
 const {
@@ -20,8 +19,9 @@ const validationDetails = async (detail) => {
     }
     const contentDetailFromMAL = await axiosServices.getHtmlContent(resultLists[0].link);
     const detailFromMAL = cheerioServices.getDetailMAL(contentDetailFromMAL);
+    const translatedDescription = await axiosServices.translateToIndo(detailFromMAL.description);
     // const { text: translatedDescription } = await translate(detailFromMAL.description, {from: 'en', to: 'id'});
-    detail.description = detailFromMAL.description; 
+    detail.description = translatedDescription; 
     detail.releaseDate = detailFromMAL.releaseDate;
     if (detail.rating === "") {
       detail.rating = detailFromMAL.rating;
