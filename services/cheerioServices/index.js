@@ -88,12 +88,14 @@ exports.getDetailAnime = async (html) => {
   const rating = $(".infozingle > p:nth-child(3)").text();
   const releaseDate = $(".infozingle > p:nth-child(9)").text();
   const genres = $(".infozingle > p:nth-child(11)").text();
+  const poster = $(".fotoanime > img").attr("src");
   return {
     description,
     title: title.split("Judul: ")[1],
     rating: rating.split("Skor: ")[1],
     releaseDate: releaseDate.split("Tanggal Rilis: ")[1],
     genres: genres.split("Genre: ")[1],
+    poster,
   };
 };
 
