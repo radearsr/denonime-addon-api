@@ -1,5 +1,5 @@
 exports.monitoringPayloadSchema = (payload) => {
-  if (!payload.link || !payload.lastTotalEps) {
+  if (payload.link === undefined || payload.lastTotalEps === undefined) {
     throw new Error("Payload belum sesuai, pastikan 2 fields terisi yaitu link dan lastTotalEps");
   }
 };
