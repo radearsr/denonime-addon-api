@@ -11,9 +11,8 @@ const otakudesuStrategy = (html) => {
   return videoPlayer;
 };
 
-const mp4Strategy = () => {
-  const result = fs.readFileSync(path.join(__dirname, "index.html"))
-  const $ = cheerio.load(result.toString());
+const mp4Strategy = (html) => {
+  const $ = cheerio.load(html);
   const script = $("body script").text();
   const splitedScript = script.split(`"`)
   return splitedScript[7]
