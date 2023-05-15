@@ -1,4 +1,5 @@
 const express = require("express");
+const configJson = require("./package.json");
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.get("/", (req, res) => {
     const ipAddress = req.header("x-forwarded-for") || req.socket.remoteAddress;
     res.send(`
       <center>
-        <h1>Welcome To Denonime Addon API</h1>
+        <h1>Welcome To Denonime Addon API v${configJson.version}</h1>
         <h4>Client From ${ipAddress}</h4>
       <center>
     `);
