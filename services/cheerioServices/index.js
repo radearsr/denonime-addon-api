@@ -48,11 +48,11 @@ exports.getDefaultEmbedPlayer = (html) => {
 
 exports.getVideoPlayer = (html, strategy) => {
   let video;
-  if (strategy === "otakudesu") {
+  if (strategy === "Otakudesu") {
     video = otakudesuStrategy(html);
-  } else if (strategy === "own") {
+  } else if (strategy === "OwnServer") {
     video = ownStrategy(html);
-  } else if (strategy === "mp4") {
+  } else if (strategy === "Mp4") {
     video = mp4Strategy(html);
   } else {
     video = "Strategy Tidak Tersedia";
