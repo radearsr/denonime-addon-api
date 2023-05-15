@@ -119,9 +119,8 @@ exports.getSourcePlayer = async (req, res) => {
   try {
     console.log(req.headers);
     getSourcePayloadSchema(req.body);
-    getSourceHeaderSchema(req.headers);
+    // getSourceHeaderSchema(req.headers);
     const { link, strategy } = req.body;
-    console.log(req.headers);
     const customHeaders = {
       headerSecchua: req.headers["sec-ch-ua"],
       headerUserAgent: req.headers["user-agent"],

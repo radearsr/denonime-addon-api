@@ -1,4 +1,6 @@
 const cheerio = require("cheerio");
+const fs = require("fs");
+const path = require("path");
 
 const otakudesuStrategy = (html) => {
   const $ = cheerio.load(html)
@@ -7,6 +9,14 @@ const otakudesuStrategy = (html) => {
   const splitedbyFileKey = scriptIncludedFormat.split(": [{'file':'")[1];
   const videoPlayer = splitedbyFileKey.split("','type':'video/mp4'}],\n")[0];
   return videoPlayer;
+};
+
+const mp4Strategy = () => {
+  const result = fs.readFileSync(path.join(__dirname, "index.html"))
+  const $ = cheerio.load(result.toString());
+  const script = $("body script").text();
+  const splitedScript = script.split(`"`)
+  return splitedScript[7]
 };
 
 const ownStrategy = (html) => {
@@ -43,6 +53,8 @@ exports.getVideoPlayer = (html, strategy) => {
     video = otakudesuStrategy(html);
   } else if (strategy === "own") {
     video = ownStrategy(html);
+  } else if (strategy === "mp4") {
+    video = mp4Strategy(html);
   } else {
     video = "Strategy Tidak Tersedia";
   }
@@ -133,3 +145,4 @@ exports.getDetailMAL = (html) => {
     releaseDate: releaseDate[0],
   };
 };
+
