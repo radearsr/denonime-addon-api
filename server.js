@@ -1,10 +1,13 @@
 const express = require("express");
+const cors = require("cors");
+
 const configJson = require("./package.json");
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use("/api", require("./routes/api"));
 
